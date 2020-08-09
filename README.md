@@ -18,3 +18,11 @@ note: `strict:true` stricter inference for data properties on `this`. If you do 
   }
 }
 ```
+
+## Usage in .vue files
+add `lang="ts"` to the script tag to declare TS as the lang used.
+```html
+<script lang="ts">
+  ...
+</script>
+```
