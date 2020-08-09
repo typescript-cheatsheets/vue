@@ -6,13 +6,13 @@ Cheatsheets for experienced Vue developers getting started with TypeScript
 
 
 ## Recommended ts.config setup
+note: `strict:true` stricter inference for data properties on `this`. If you do not use it, `this` will always be treated as `any`
 ```json
 // tsconfig.json
 {
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    // this enables stricter inference for data properties on `this`
     "strict": true,
     "moduleResolution": "node"
   }
