@@ -26,3 +26,12 @@ add `lang="ts"` to the script tag to declare TS as the lang used.
   ...
 </script>
 ```
+
+use `defineComponent` to get type inference in Vue component options
+```js
+import { defineComponent } from 'vue'
+
+const Component = defineComponent({
+  // type inference enabled
+})
+```
