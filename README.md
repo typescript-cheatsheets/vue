@@ -18,12 +18,12 @@ Cheatsheets for experienced Vue developers getting started with TypeScript
   npm install --global @vue/cli
 
   # 2. Create a new project, then choose the "Manually select features" option
-  vue create my-project-name
+  vue create <my-project-name>
   ```
 
-2. [Vite](https://github.com/vitejs/vite) is a new build tool by Evan You. Which current only works with Vue 3.x but works with TypeScript out-of-the-box.
+2. [Vite](https://github.com/vitejs/vite) is a new build tool by Evan You. It currently only works with Vue 3.x but supports TypeScript out-of-the-box.
 
-  > ⚠ Current in beta. Don't use in production.
+  > ⚠ Currently in beta. Do not use in production.
 
   ```bash
   npm init vite-app <project-name>
@@ -36,7 +36,7 @@ Cheatsheets for experienced Vue developers getting started with TypeScript
 
 ## Recommended `ts.config` setup
 
-note: `strict:true` stricter inference for data properties on `this`. If you do not use it, `this` will always be treated as `any`
+>note: `strict:true` stricter inference for data properties on `this`. If you do not use it, `this` will always be treated as `any`
 ```json
 // tsconfig.json
 {
@@ -51,7 +51,7 @@ note: `strict:true` stricter inference for data properties on `this`. If you do 
 
 ## Usage in `.vue` files
 Add `lang="ts"` to the script tag to declare TS as the `lang` used.
-```vue
+```js
 <script lang="ts">
   ...
 </script>
@@ -59,11 +59,13 @@ Add `lang="ts"` to the script tag to declare TS as the `lang` used.
 
 In Vue 2.x you need  to define components with `Vue.component` or `Vue.extend`:
 
-```vue
+```js
 <script lang="ts">
 import Vue from "vue";
 
 export default Vue.extend({
+
+  // type inference enabled
   name: "HelloWorld",
   props: {
     msg: String
