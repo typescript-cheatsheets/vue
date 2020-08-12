@@ -9,7 +9,7 @@ Cheatsheets for experienced Vue developers getting started with TypeScript
 1. A good understanding of [Vue.js](https://vuejs.org/)
 2. Read the TypeScript support section in the Vue docs [2.x](https://vuejs.org/v2/guide/typescript.html) | [3.x](https://v3.vuejs.org/guide/typescript-support.html#typescript-support)
 
-## React + TypeScript Starter Kits
+## Vue + TypeScript Starter Kits
 
 1. Using the [Vue CLI](https://vuejs.org/v2/guide/installation.html#CLI) , you can select the [TypeScript plugin](https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-typescript) to be setup in a new a Vue project. 
 
