@@ -74,7 +74,7 @@ export default Vue.extend({
 
 In Vue 3.x you can use `defineComponent` to get type inference in Vue component options
 
-```vue
+```js
 import { defineComponent } from 'vue'
 
 const Component = defineComponent({
