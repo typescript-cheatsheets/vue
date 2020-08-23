@@ -84,5 +84,68 @@ const Component = defineComponent({
 })
 ```
 
+### Class Component
+[Vue Class Components](https://class-component.vuejs.org/) offers an alternative class-style syntax for Vue components and it integrates well with TypeScript.
+
+To have consistent support for decorators in your Vue components, it's also recomended to install [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator).
+
+
+To get started with both libraries, in your existing Vue project, run: 
+```
+npm install --save vue-class-component
+npm install --save vue-property-decorator
+```
+
+You only need to import `vue-property-decorator` into your `.vue`  file as it extends off `vue-class-component`. 
+
+You can now write components like this:
+
+```vue
+<template>
+  <div>
+    {{ count }}
+    <button v-on:click="increment">+</button>
+    <button v-on:click="decrement">-</button>
+    {{ computedValue }}
+  </div>
+</template>
+
+<script>
+import { Vue, Component } from "vue-property-decorator";
+
+
+@Component
+export default class Hello extends Vue {
+
+  count: number = 0
+  vue: string = "vue"
+  ts: string = "ts"
+
+  // Lifecycle methods can be accessed like this
+  mounted() {
+    console.log('component mounted')
+  }
+
+  // Method are component methods
+  increment(): void {
+    this.count++
+  }
+
+  decrement(): void {
+    this.count--
+  }
+
+  // Computed values are getters
+  get computedValue(): string {
+    return `${vue} and ${ts} rocks!`
+  }
+}
+</script>
+```
+See the [full guide for Vue Class Components](https://class-component.vuejs.org/guide/class-component.html#data).
+
+
+
 # Other Vue + TypeScript resources
 - Views on Vue podcast - https://devchat.tv/views-on-vue/vov-076-typescript-tell-all-with-jack-koppa/
+- Focuses quite a lot on class components and third party libs like vue-property-decorator   https://blog.logrocket.com/how-to-write-a-vue-js-app-completely-in-typescript/
