@@ -95,8 +95,7 @@ To have consistent support for decorators in your Vue components, it's also reco
 
 To get started with both libraries in your existing Vue project, run: 
 ```
-npm install --save vue-class-component
-npm install --save vue-property-decorator
+npm install vue-class-component vue-property-decorator
 ```
 
 You only need to import `vue-property-decorator` into your `.vue` file as it extends `vue-class-component`. 
