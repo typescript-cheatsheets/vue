@@ -90,7 +90,7 @@ const Component = defineComponent({
 ### Class Components
 [Vue Class Components](https://class-component.vuejs.org/) offers an alternative class-style syntax for Vue components which integrates well with TypeScript.
 
-To have consistent support for decorators in your Vue components, it's also recomended to install [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator).
+To have consistent support for decorators in your Vue components, it's also recommended to install [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator).
 
 
 To get started with both libraries in your existing Vue project, run: 
@@ -149,7 +149,7 @@ See the [full guide for Vue Class Components](https://class-component.vuejs.org/
 
 ## Props
 
-`PropType` can be used to annote props with a particular object shape.
+`PropType` can be used to annotate props with a particular object shape.
 
 ```vue
 import Vue, { PropType } from 'vue'
@@ -174,7 +174,6 @@ export default Vue.extend({
   }
 });
 </script>
-
 ```
 
 With vue-class-components and vue-property-decorator, you can use the `Prop` decorator:
@@ -194,7 +193,6 @@ export default class InfoCard extends Vue {
   @Prop({ required: true }) readonly info: PersonInfo;
 }
 </script>
-
 ```
 
 # Other Vue + TypeScript resources
