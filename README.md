@@ -195,6 +195,53 @@ export default class InfoCard extends Vue {
 </script>
 ```
 
+## Data Properties
+
+You can enforce types on Vue data properties by annotating the return data object:
+
+```ts
+interface Post {
+  title: string;
+  contents: string;
+  likes: number;
+}
+
+export default Vue.extend({
+  data(): { newPost: Post } {
+    return {
+      newPost: {
+        title: "",
+        contents: "",
+        likes: 0
+      }
+    };
+  }
+});
+```
+
+It might be tempting to annotate your Vue data properties using `as` like this:
+
+```ts
+interface Post {
+  title: string;
+  contents: string;
+  likes: number;
+}
+
+export default Vue.extend({
+  data() {
+    return {
+      newPost: {
+        title: "",
+        contents: "",
+        likes: 0
+      } as Post // ❌ Avoid doing this
+    };
+  }
+});
+```
+Note that [type assertion](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) like this does not provide any type safety. If for example, the `contents` property was missing in `newPost`, TypeScript would not catch this error. 
+
 # Other Vue + TypeScript resources
 - Views on Vue podcast - https://devchat.tv/views-on-vue/vov-076-typescript-tell-all-with-jack-koppa/
 - Focuses a lot on class components and vue-property-decorator - https://blog.logrocket.com/how-to-write-a-vue-js-app-completely-in-typescript/
