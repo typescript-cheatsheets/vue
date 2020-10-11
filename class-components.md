@@ -1,4 +1,7 @@
 # Class Components
+
+## Overview
+
 [Vue Class Components](https://class-component.vuejs.org/) offers an alternative class-style syntax for Vue components which integrates well with TypeScript.
 
 To have consistent support for decorators in your Vue components, it's also recommended to install [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator).
@@ -57,3 +60,23 @@ export default class Hello extends Vue {
 See the [full guide for Vue Class Components](https://class-component.vuejs.org/guide/class-component.html#data).
 
 > _Class components should not confused with the now abandoned [Class API proposal](https://github.com/vuejs/rfcs/pull/17#issuecomment-494242121)._
+
+## Props
+You can use the `Prop` decorator to annoate your prop types like so:
+
+```ts
+<script lang="ts">
+import { Vue, Component, Prop } from "vue-property-decorator";
+
+interface PersonInfo { 
+  firstName: string,
+  surname: string,
+  age: number
+}
+
+@Component
+export default class InfoCard extends Vue {
+  @Prop({ required: true }) readonly info: PersonInfo;
+}
+</script>
+```
