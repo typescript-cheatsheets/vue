@@ -3,6 +3,7 @@
 Cheatsheets for experienced Vue developers getting started with TypeScript.
 
 -   [Vue 3 specifics](vue-3.md)
+-   [Class Components & Decorators](class-components.md)
 
 # Section 1: Setup
 
@@ -116,26 +117,7 @@ export default Vue.extend({
 </script>
 ```
 
-With vue-class-components and vue-property-decorator, you can use the `Prop` decorator:
-
-```vue
-<script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
-
-interface PersonInfo { 
-  firstName: string,
-  surname: string,
-  age: number
-}
-
-@Component
-export default class InfoCard extends Vue {
-  @Prop({ required: true }) readonly info: PersonInfo;
-}
-</script>
-```
-
-## Data Properties
+## Data Properties (Options API)
 
 You can enforce types on Vue data properties by annotating the return data object:
 
@@ -181,6 +163,30 @@ export default Vue.extend({
 });
 ```
 Note that [type assertion](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) like this does not provide any type safety. If for example, the `contents` property was missing in `newPost`, TypeScript would not catch this error. 
+
+## Computed Properties (Options API)
+
+Typing the return type for your computed properties is important especially when `this` is involved as TypeScript sometimes has trouble infering the type. 
+
+```ts
+
+export default Vue.extend({
+  data() {
+    return {
+      name: 'World',
+    }
+  },
+  computed: {
+    greet(): string {  //👈 Remember to annotate your computed properties like so. 
+      return 'Hello ' + this.name
+    },
+  }
+})
+
+```
+
+> 
+
 
 # Other Vue + TypeScript resources
 - Views on Vue podcast - https://devchat.tv/views-on-vue/vov-076-typescript-tell-all-with-jack-koppa/
