@@ -76,7 +76,33 @@ interface PersonInfo {
 
 @Component
 export default class InfoCard extends Vue {
-  @Prop({ required: true }) readonly info: PersonInfo;
+  @Prop() readonly info!: PersonInfo;
+  @Prop({ default: false }) readonly admin?: boolean;
 }
 </script>
+```
+Is equivalent to:
+
+```ts
+import Vue from "vue-property-decorator";
+import Vue, { PropType } from 'vue'
+
+interface PersonInfo {
+  firstName: string,
+  surname: string,
+  age: number
+}
+export default {
+  props: {
+    info: {
+      type: Object as PropType<PersonInfo>,
+      required: true
+    },
+    admin: {
+      type: Boolean,
+      default: false
+    }
+  },
+}
+
 ```
