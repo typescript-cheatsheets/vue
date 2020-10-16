@@ -117,6 +117,33 @@ export default Vue.extend({
 </script>
 ```
 
+Alternatively, you can also annote your prop types with an anonymous function:
+
+```vue
+import Vue from 'vue'
+
+<script lang="ts">
+import Vue from "vue";
+
+interface PersonInfo { 
+  firstName: string,
+  surname: string,
+  age: number
+}
+
+export default Vue.extend({
+  
+  name: "InfoCard",
+  props: {
+    info: {
+      type: Object as () => PersonInfo,
+      required: true
+    }
+  }
+});
+</script>
+```
+
 ## Data Properties (Options API)
 
 You can enforce types on Vue data properties by annotating the return data object:
