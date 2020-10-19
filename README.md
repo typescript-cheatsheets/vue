@@ -218,3 +218,4 @@ export default Vue.extend({
 # Other Vue + TypeScript resources
 - Views on Vue podcast - https://devchat.tv/views-on-vue/vov-076-typescript-tell-all-with-jack-koppa/
 - Focuses a lot on class components and vue-property-decorator - https://blog.logrocket.com/how-to-write-a-vue-js-app-completely-in-typescript/
+- Vue 3 Hooks and Type Safety with TypeScript - https://www.youtube.com/watch?v=aJdi-uEKYAc
