@@ -30,3 +30,46 @@ declare const props: {
 
 export const welcome = computed(() => `Welcome, ${props.name}!`)
 ```
+
+## Composition API
+
+### Refs
+
+Vue can infer the type of your `ref`'s but if you need to represent some more complex types you can do so with generics:
+
+```ts
+import {ref} from "vue"
+
+interface PersonInfo { 
+  firstName: string,
+  surname: string,
+  age: number
+}
+
+const people = ref<PersonInfo[]>([])
+
+```
+
+Alternatively you can use casting with `as`. This should be used if the type is unknown. Consider this example where we create a composition wrapper function around `fetch` and we dont know the data structure that will be returned.
+
+```ts
+
+import { ref, Ref } from "vue";
+
+type ApiRequest = () => Promise<void>;
+
+// When using this function we can supply the type via generics
+export function useAPI<T>(url: RequestInfo, options?: RequestInit) {
+  
+  const response = ref() as Ref<T>;  // 👈 note we're typing our ref using `as`
+
+  const request: ApiRequest = async () => {
+    const resp = await fetch(url, options);
+    const data = await resp.json();
+    response.value = data;
+  };
+
+  return { response, request };
+}
+
+```

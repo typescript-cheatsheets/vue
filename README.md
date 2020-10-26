@@ -3,6 +3,7 @@
 Cheatsheets for experienced Vue developers getting started with TypeScript.
 
 -   [Vue 3 specifics](vue-3.md)
+-   [Class Components & Decorators](class-components.md)
 
 # Section 1: Setup
 
@@ -87,66 +88,6 @@ const Component = defineComponent({
 });
 ```
 
-### Class Components
-[Vue Class Components](https://class-component.vuejs.org/) offers an alternative class-style syntax for Vue components which integrates well with TypeScript.
-
-To have consistent support for decorators in your Vue components, it's also recommended to install [vue-property-decorator](https://github.com/kaorun343/vue-property-decorator).
-
-
-To get started with both libraries in your existing Vue project, run: 
-```
-npm install vue-class-component vue-property-decorator
-```
-
-You only need to import `vue-property-decorator` into your `.vue` file as it extends `vue-class-component`. 
-
-You can now write TS in your components like this:
-
-```vue
-<template>
-  <div>
-    {{ count }}
-    <button v-on:click="increment">+</button>
-    <button v-on:click="decrement">-</button>
-    {{ computedValue }}
-  </div>
-</template>
-
-<script lang="ts">
-import { Vue, Component } from "vue-property-decorator";
-
-@Component
-export default class Hello extends Vue {
-
-  count: number = 0
-  vue: string = "vue"
-  ts: string = "ts"
-
-  // Lifecycle methods can be accessed like this
-  mounted() {
-    console.log('component mounted')
-  }
-
-  // Method are component methods
-  increment(): void {
-    this.count++
-  }
-
-  decrement(): void {
-    this.count--
-  }
-
-  // Computed values are getters
-  get computedValue(): string {
-    return `${vue} and ${ts} rocks!`
-  }
-}
-</script>
-```
-See the [full guide for Vue Class Components](https://class-component.vuejs.org/guide/class-component.html#data).
-
-> _Class components should not confused with the now abandoned [Class API proposal](https://github.com/vuejs/rfcs/pull/17#issuecomment-494242121)._
-
 ## Props
 
 `PropType` can be used to annotate props with a particular object shape.
@@ -176,11 +117,13 @@ export default Vue.extend({
 </script>
 ```
 
-With vue-class-components and vue-property-decorator, you can use the `Prop` decorator:
+Alternatively, you can also annote your prop types with an anonymous function:
 
 ```vue
+import Vue from 'vue'
+
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import Vue from "vue";
 
 interface PersonInfo { 
   firstName: string,
@@ -188,14 +131,20 @@ interface PersonInfo {
   age: number
 }
 
-@Component
-export default class InfoCard extends Vue {
-  @Prop({ required: true }) readonly info: PersonInfo;
-}
+export default Vue.extend({
+  
+  name: "InfoCard",
+  props: {
+    info: {
+      type: Object as () => PersonInfo,
+      required: true
+    }
+  }
+});
 </script>
 ```
 
-## Data Properties
+## Data Properties (Options API)
 
 You can enforce types on Vue data properties by annotating the return data object:
 
@@ -242,6 +191,31 @@ export default Vue.extend({
 ```
 Note that [type assertion](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) like this does not provide any type safety. If for example, the `contents` property was missing in `newPost`, TypeScript would not catch this error. 
 
+## Computed Properties (Options API)
+
+Typing the return type for your computed properties is important especially when `this` is involved as TypeScript sometimes has trouble infering the type. 
+
+```ts
+
+export default Vue.extend({
+  data() {
+    return {
+      name: 'World',
+    }
+  },
+  computed: {
+    greet(): string {  //👈 Remember to annotate your computed properties like so. 
+      return 'Hello ' + this.name
+    },
+  }
+})
+
+```
+
+> 
+
+
 # Other Vue + TypeScript resources
 - Views on Vue podcast - https://devchat.tv/views-on-vue/vov-076-typescript-tell-all-with-jack-koppa/
 - Focuses a lot on class components and vue-property-decorator - https://blog.logrocket.com/how-to-write-a-vue-js-app-completely-in-typescript/
+- Vue 3 Hooks and Type Safety with TypeScript - https://www.youtube.com/watch?v=aJdi-uEKYAc
